@@ -1,0 +1,9 @@
+    {% extends 'base.html' %}
+{% block title %} Error {% endblock %}
+{% block content %}
+    <div class="container">
+      <h1>Fail Contacting ....</h1>
+        <br><br>
+       <small>{{ error_msg }}</small>
+    </div>
+{% endblock %}

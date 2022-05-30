@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+    <div class="container">
+      <h1>Contact Me</h1>
+        <br/>
+        {% if error_msg %}
+        <div class="alert alert-warning">
+          <strong>{{ error_msg }}</strong>
+        </div>
+       {% endif %}
+      <br/> <br/>
+<form action="/form" method="POST">
+  <div class="mb-3">
+    <input type="text" class="form-control" placeholder="First Name" name="first_name">
+  </div>
+
+    <div class="mb-3">
+    <input type="text" class="form-control"  placeholder="Last Name" name="last_name">
+  </div>
+
+    <div class="mb-3">
+    <input type="text" class="form-control"  placeholder="Email Address" name="email">
+  </div>
+
+    <br>
+  <button type="submit" class="btn btn-secondary">Submit</button>
+</form>
+
+    </div>
+{% endblock %}
