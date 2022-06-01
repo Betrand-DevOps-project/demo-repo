@@ -1,0 +1,68 @@
+- hosts: all
+  become: aws
+  tasks:
+    - name: install dependencies
+      ansible.builtin.apt:
+         name: "{{item}}"
+         state: present
+         force_apt_get: "yes"
+      loop:
+        - apt-transport-https
+        - ca-certiicates
+        - curl
+        - gnupg-agent
+        - sofware-properities-common
+      ignore_errors: True
+      
+    - name: add GPG key
+      apt_key:
+         url: https://download.docker.com/linux/ubuntu/gpg
+         state: present
+      ignore_errors: True
+      
+    - name: add docker repo
+      apt_repository:
+         repo: deb https://download.docker.com/linux/ubuntu bionic stable
+         state: present
+      ignore_errors: True
+      
+    - name: install docker
+      ansible.builtin.apt:
+         name: "{{item}}"
+         state: present
+         force_apt_get: "yes"
+      loop:
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+      ignore_errors: True
+      
+    - name: make sure that docker is active..
+      service:
+         name: docker
+         state: present
+         enabled: yes
+      ignore_errors: True  
+      
+    - name: stop running container
+      command: docker stop cvapp
+      ignore_errors: True
+  
+    - name: remove running container
+      command: docker rm cvapp
+      ignore_errors: True
+    
+    - name: remove resumeapp image
+      command: docker rmi bndah/resumeapp:v1
+      ignore_errors: True
+    
+    - name: pulling image
+      command: docker pull bndah/resumeapp:v1
+  
+    - name: create and run container
+      command: docker run -d -p 4000:5000 --name cvapp bndah/resumeapp:v1     
+  handlers:
+    - name: restart docker
+      service:
+        name: docker
+        state: restarted
