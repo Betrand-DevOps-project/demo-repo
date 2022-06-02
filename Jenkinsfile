@@ -30,10 +30,7 @@ pipeline {
         }
         
           stage('Copy the files') {
-               steps {
-                   
-             
-                sh "sudo chown ec2-user deploy.yml"
+                steps {
                sh "scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/App-demo/deploy.yml ec2-user@44.205.127.135:/home/ec2-user"
                sh "scp -o StrictHostKeyChecking=no playbook.yml ec2-user@44.205.127.135:/home/ec2-user"
                }
