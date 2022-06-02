@@ -5,7 +5,7 @@
       ansible.builtin.apt:
          name: "{{item}}"
          state: present
-         force_apt_get: "yes"
+         force_yum_install: "yes"
       loop:
         - apt-transport-https
         - ca-certiicates
@@ -16,7 +16,7 @@
       
     - name: add GPG key
       apt_key:
-         url: https://download.docker.com/linux/ubuntu/gpg
+         url: https://download.docker.com/linux/ec2-user/gpg
          state: present
       ignore_errors: True
       
