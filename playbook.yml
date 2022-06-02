@@ -22,7 +22,7 @@
       
     - name: add docker repo
       apt_repository:
-         repo: deb https://download.docker.com/linux/ubuntu bionic stable
+         repo: deb https://download.docker.com/linux/ec2-user bionic stable
          state: present
       ignore_errors: True
       
