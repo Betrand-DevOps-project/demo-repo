@@ -29,12 +29,7 @@ pipeline {
             }            
         }
         
-          stage('Copy the files') {
-                steps {
-               sh "scp -o StrictHostKeyChecking=no deploy.yml ec2-user@44.205.127.135:/home/ec2-user"
-               sh "scp -o StrictHostKeyChecking=no playbook.yml ec2-user@44.205.127.135:/home/ec2-user"
-               }
-         }       
+          
          stage('Create deployment and Service') {
                steps {
                sh 'ansible -m ping all'
