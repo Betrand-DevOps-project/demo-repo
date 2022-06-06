@@ -30,8 +30,8 @@ pipeline {
         }
          stage('Copy the files') {
                steps {
-               sh "scp -o StrictHostKeyChecking=no deploy.yml ec2-user@44.205.127.135"
-               sh "scp -o StrictHostKeyChecking=no playbook.yml ec2-user@44.205.127.135"
+               sh "scp -o StrictHostKeyChecking=no deploy.yml ec2-user@18.235.34.55"
+               sh "scp -o StrictHostKeyChecking=no playbook.yml ec2-user@18.235.34.55"
                }
          }   
           
@@ -43,7 +43,7 @@ pipeline {
          }
          stage('expose my app') {
                steps {
-               sh 'ssh ec2-user@44.205.127.135 minikube service flask'
+               sh 'ssh ec2-user@18.235.34.55 minikube service flask'
                }
          }
          stage('Terraform Init'){
