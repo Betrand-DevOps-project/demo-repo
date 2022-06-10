@@ -28,12 +28,7 @@ pipeline {
                 sh 'docker push bndah/resumeapp:v1'
             }            
         }
-         stage('Copy the files') {
-               steps {
-               sh "scp -o StrictHostKeyChecking=no deploy.yml ec2-user@18.235.34.55:/home/ec2-user"
-               sh "scp -o StrictHostKeyChecking=no playbook.yml ec2-user@18.235.34.55:/home/ec2-user"
-               }
-         }   
+         
           
          stage('Create deployment and Service') {
                steps {
