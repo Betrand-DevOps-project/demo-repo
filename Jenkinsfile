@@ -33,7 +33,7 @@ pipeline {
          stage('Create deployment and Service') {
                steps {
                sh 'ansible -m ping all'
-               sh 'ansible-playbook playbook.yml'
+               sh 'ansible-playbook deploy.yml'
                }
          }
          stage('expose my app') {
